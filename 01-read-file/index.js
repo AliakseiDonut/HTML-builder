@@ -3,10 +3,8 @@ const path = require('path');
 
 const filePath = path.join(__dirname, 'text.txt');
 
-fs.readFile(filePath, 'utf-8', (err, content) => {
-    if(err){
-        throw err;
-    }
+const stream = fs.createReadStream(filePath); 
 
-    console.log(content);
-})
+stream.on('data', (chunk) => {
+    console.log(chunk.toString());
+});
