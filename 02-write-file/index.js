@@ -24,4 +24,7 @@ fs.writeFile(filePath,"", err => {
     });
 })
 
-
+process.on('SIGINT', () => {
+    stdout.write('До свидания!');
+    process.exit();
+});
