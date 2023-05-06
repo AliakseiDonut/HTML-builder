@@ -5,16 +5,17 @@ const sourceDir = path.join(__dirname, 'files');
 const newDir = path.join(__dirname, 'files-copy');
 
 fs.stat(newDir, (err, stats) => {
-    if(!stats){
-        fs.mkdir(newDir, (err) => {
-            if(err){
-                throw err;
-            }
-            copyDir();
-        });
-    }else{
-        copyDir();
-    }
+  if(!stats){
+    fs.mkdir(newDir, (err) => {
+      if(err){
+        throw err;
+      }
+      copyDir();
+    });
+  }else{
+    clearDir();
+    copyDir();
+  }
 });
 
 function copyDir() {
@@ -36,4 +37,18 @@ function copyDir() {
     });
   }
   
+function clearDir(){
+  fs.readdir(newDir, (err, files) => {
+    if (err) {
+      throw err;
+    }
 
+    files.forEach((file) => {
+      const copyFile = path.join(newDir, file);
+
+      fs.unlink(copyFile, (err) => {
+
+      });
+    });
+  });
+}
