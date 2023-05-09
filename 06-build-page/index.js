@@ -87,9 +87,6 @@ const newDir = path.join(projectDistPath, 'assets');
 fs.stat(newDir, (err, stats) => {
   if(!stats){
     fs.mkdir(newDir, (err) => {
-      if(err){
-        throw err;
-      }
       copyDir();
     });
   }else{
@@ -121,9 +118,6 @@ function copyDir() {
                   }); 
               }else if(stats.isDirectory()){
                   fs.mkdir(copyFile, (err) => {
-                      if(err){
-                          throw err;
-                      }
                       copyDirRecursive(sourceFile, copyFile);
                   });
               }
